@@ -24,11 +24,11 @@ export const PrivatePage = ({
   useEffect(() => {
    
     switch (true) {
-      case !idUser || !token: // Se não tem usuário ou token logado
+      case !idUser || !token: 
         resetAllStates();
         navigate("/login");
         break;
-      case onlyAdmin && role !== "admin": // Se precisa ser admin mas não é
+      case onlyAdmin && role !== "admin": 
         navigate(-1);
         break;
       case onlyManagerOrAdmin && role !== "admin" && role !== "manager": // Se precisa ser manager/admin mas não é
@@ -41,7 +41,7 @@ export const PrivatePage = ({
     }
   }, [idUser, token, role, onlyAdmin, onlyManagerOrAdmin, navigate, resetAllStates]);
 
-  if (!idUser || !token) return <FullPage />; // ← DESCOMENTAR
+  if (!idUser || !token) return <FullPage />; 
 
   if (isChecking) {
     return <FullPage />;

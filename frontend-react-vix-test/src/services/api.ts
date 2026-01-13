@@ -7,6 +7,40 @@ export interface IResponse<T> {
   data: T;
 }
 
+axios.interceptors.request.use(
+  (config) => {
+    const storedData = localStorage.getItem("userProfile");
+    if (storedData) {
+      try {
+        const userData = JSON.parse(storedData);
+        const token = userData?.state?.token;
+        
+        if (token && config.headers) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+      } catch (error) {
+        console.error("Erro ao parsear dados do usuário:", error);
+      }
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("userProfile");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
+
 export const baseAuth = (auth: Record<string, unknown> = {}) => {
   const signature = import.meta.env.VITE_SIGN_HASH || "";
 
