@@ -4,7 +4,7 @@ import { middlewareLocalStorage } from "./middlewareLocalStorage";
 export type TRole = "admin" | "manager" | "member";
 
 export interface IUserProfile {
-  idUser: number | null;
+  idUser: string | null;
   profileImgUrl: string | null;
   objectName?: string;
   imageUrl?: string;
