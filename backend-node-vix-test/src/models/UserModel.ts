@@ -11,18 +11,17 @@ export class UserModel {
       },
     });
   }
-}
 
-async findById(idUser: string) {
-    return prisma.user.findUnique({
-        where: {
-            idUser,
-            deletedAt: null,
-        },
+  async findById(idUser: string) {
+    return prisma.user.findFirst({
+      where: {
+        idUser,
+        deletedAt: null,
+      },
     });
-}
+  }
 
-async create(data: TUserCreated & { password: string }) {
+  async create(data: TUserCreated & { password: string }) {
     return prisma.user.create({
       data: {
         username: data.username,
