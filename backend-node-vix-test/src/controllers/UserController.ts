@@ -28,4 +28,23 @@ export class UserController {
     const result = await this.userService.delete(idUser);
     return res.status(STATUS_CODE.OK).json(result);
   }
+
+  async updatePassword(req: CustomRequest<unknown>, res: Response) {
+    const { idUser } = req.params;
+    const result = await this.userService.updatePassword(idUser, req.body);
+    return res.status(STATUS_CODE.OK).json(result);
+  }
+
+  async updateProfileImage(req: CustomRequest<unknown>, res: Response) {
+    const { idUser } = req.params;
+    const imageUrl = req.body.imageUrl; // URL da imagem (assumindo upload já feito)
+    const result = await this.userService.updateProfileImage(idUser, imageUrl);
+    return res.status(STATUS_CODE.OK).json(result);
+  }
+
+  async deleteProfileImage(req: CustomRequest<unknown>, res: Response) {
+    const { idUser } = req.params;
+    const result = await this.userService.deleteProfileImage(idUser);
+    return res.status(STATUS_CODE.OK).json(result);
+  }
 }

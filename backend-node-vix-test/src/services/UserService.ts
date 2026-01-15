@@ -4,6 +4,7 @@ import { ERROR_MESSAGE } from "../constants/erroMessages";
 import { STATUS_CODE } from "../constants/statusCode";
 import { TUserCreated, userCreatedSchema } from "../types/validations/User/createUser";
 import { z } from "zod";
+import bcrypt from "bcryptjs";
 
 const userUpdateSchema = userCreatedSchema.partial();
 type TUserUpdate = z.infer<typeof userUpdateSchema>;
@@ -78,5 +79,53 @@ export class UserService {
     await this.userModel.delete(idUser);
     
     return { message: "User deleted successfully" };
+  }
+
+  async updatePassword(idUser: string, data: { currentPassword: string; newPassword: string }) {
+    const user = await this.userModel.findById(idUser);
+    
+    if (!user) {
+      throw new AppError(ERROR_MESSAGE.USER_NOT_FOUND, STATUS_CODE.NOT_FOUND);
+    }
+
+    // Verificar senha atual
+    const isPasswordValid = await bcrypt.compare(data.currentPassword, user.password);
+    if (!isPasswordValid) {
+      throw new AppError("Current password is incorrect", STATUS_CODE.UNAUTHORIZED);
+    }
+
+    // Hash da nova senha
+    const hashedPassword = await bcrypt.hash(data.newPassword, 10);
+
+    // Atualizar senha
+    await this.userModel.update(idUser, { password: hashedPassword });
+
+    return { message: "Password updated successfully" };
+  }
+
+  async updateProfileImage(idUser: string, imageUrl: string) {
+    const user = await this.userModel.findById(idUser);
+    
+    if (!user) {
+      throw new AppError(ERROR_MESSAGE.USER_NOT_FOUND, STATUS_CODE.NOT_FOUND);
+    }
+
+    const updatedUser = await this.userModel.update(idUser, { profileImgUrl: imageUrl });
+    
+    // Não retornar a senha
+    const { password, ...userWithoutPassword } = updatedUser;
+    return userWithoutPassword;
+  }
+
+  async deleteProfileImage(idUser: string) {
+    const user = await this.userModel.findById(idUser);
+    
+    if (!user) {
+      throw new AppError(ERROR_MESSAGE.USER_NOT_FOUND, STATUS_CODE.NOT_FOUND);
+    }
+
+    await this.userModel.update(idUser, { profileImgUrl: null });
+
+    return { message: "Profile image removed successfully" };
   }
 }

@@ -50,4 +50,34 @@ userRoutes.delete(
   }
 );
 
+// Alterar senha (próprio usuário)
+userRoutes.put(
+  `${BASE_PATH}/:idUser/password`,
+  authUser,
+  isSelfOrIsManagerOrIsAdm,
+  async (req, res) => {
+    await userController.updatePassword(req, res);
+  }
+);
+
+// Atualizar imagem de perfil (próprio usuário)
+userRoutes.post(
+  `${BASE_PATH}/:idUser/profile-image`,
+  authUser,
+  isSelfOrIsManagerOrIsAdm,
+  async (req, res) => {
+    await userController.updateProfileImage(req, res);
+  }
+);
+
+// Remover imagem de perfil (próprio usuário)
+userRoutes.delete(
+  `${BASE_PATH}/:idUser/profile-image`,
+  authUser,
+  isSelfOrIsManagerOrIsAdm,
+  async (req, res) => {
+    await userController.deleteProfileImage(req, res);
+  }
+);
+
 export { userRoutes };
