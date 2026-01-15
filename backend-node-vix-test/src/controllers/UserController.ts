@@ -13,38 +13,44 @@ export class UserController {
 
   async getById(req: CustomRequest<unknown>, res: Response) {
     const { idUser } = req.params;
-    const result = await this.userService.getById(idUser);
+    const idUserStr = Array.isArray(idUser) ? idUser[0] : idUser;
+    const result = await this.userService.getById(idUserStr);
     return res.status(STATUS_CODE.OK).json(result);
   }
 
   async update(req: CustomRequest<unknown>, res: Response) {
     const { idUser } = req.params;
-    const result = await this.userService.update(idUser, req.body);
+    const idUserStr = Array.isArray(idUser) ? idUser[0] : idUser;
+    const result = await this.userService.update(idUserStr, req.body);
     return res.status(STATUS_CODE.OK).json(result);
   }
 
   async delete(req: CustomRequest<unknown>, res: Response) {
     const { idUser } = req.params;
-    const result = await this.userService.delete(idUser);
+    const idUserStr = Array.isArray(idUser) ? idUser[0] : idUser;
+    const result = await this.userService.delete(idUserStr);
     return res.status(STATUS_CODE.OK).json(result);
   }
 
   async updatePassword(req: CustomRequest<unknown>, res: Response) {
     const { idUser } = req.params;
-    const result = await this.userService.updatePassword(idUser, req.body);
+    const idUserStr = Array.isArray(idUser) ? idUser[0] : idUser;
+    const result = await this.userService.updatePassword(idUserStr, req.body);
     return res.status(STATUS_CODE.OK).json(result);
   }
 
   async updateProfileImage(req: CustomRequest<unknown>, res: Response) {
     const { idUser } = req.params;
+    const idUserStr = Array.isArray(idUser) ? idUser[0] : idUser;
     const imageUrl = req.body.imageUrl; // URL da imagem (assumindo upload já feito)
-    const result = await this.userService.updateProfileImage(idUser, imageUrl);
+    const result = await this.userService.updateProfileImage(idUserStr, imageUrl);
     return res.status(STATUS_CODE.OK).json(result);
   }
 
   async deleteProfileImage(req: CustomRequest<unknown>, res: Response) {
     const { idUser } = req.params;
-    const result = await this.userService.deleteProfileImage(idUser);
+    const idUserStr = Array.isArray(idUser) ? idUser[0] : idUser;
+    const result = await this.userService.deleteProfileImage(idUserStr);
     return res.status(STATUS_CODE.OK).json(result);
   }
 }
