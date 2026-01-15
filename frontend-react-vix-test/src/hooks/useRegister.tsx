@@ -47,7 +47,7 @@ export const useRegister = () => {
     }
 
     const response = await api.post({
-      url: "/user",
+      url: "/auth/register",
       data: {
         username,
         password,
@@ -60,6 +60,8 @@ export const useRegister = () => {
       toast.error(response.message);
       return;
     }
+    
+    toast.success(t("loginRegister.registerSuccess") || "Cadastro realizado com sucesso!");
     return navigate("/login");
   };
 
