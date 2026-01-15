@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   XAxis,
   YAxis,
@@ -17,9 +17,26 @@ import { useZGlobalVar } from "../../../../stores/useZGlobalVar";
 import { IFormatData } from "../../../../types/socketType";
 
 export const MainGraphic = () => {
-  const [chartData] = useState<IFormatData[]>([]);
+  const [chartData, setChartData] = useState<IFormatData[]>([]);
   const { theme, mode } = useZTheme();
   const { t } = useTranslation();
+
+  // Mock de dados: gera valores aleatórios simulando uso de CPU
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const randomValue = Math.random() * 100; // Valor aleatório entre 0 e 100
+      
+      setChartData((prev) => {
+        const newData = [...prev, { time, value: randomValue }];
+        // Mantém apenas os últimos 20 pontos
+        return newData.slice(-20);
+      });
+    }, 2000); // Atualiza a cada 2 segundos
+
+    return () => clearInterval(interval);
+  }, []);
 
   const lastCpuUsage = chartData[chartData.length - 1]?.value || 0;
 
