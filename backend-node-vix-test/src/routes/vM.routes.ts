@@ -54,6 +54,23 @@ vMRoutes.put(
   },
 );
 
+// ======== PATCHs ========
+vMRoutes.patch(
+  `${BASE_PATH}/:idVM/start`,
+  authUser,
+  async (req, res) => {
+    await vMController.startVM(req, res);
+  },
+);
+
+vMRoutes.patch(
+  `${BASE_PATH}/:idVM/pause`,
+  authUser,
+  async (req, res) => {
+    await vMController.pauseVM(req, res);
+  },
+);
+
 // ======== DELETEs ========
 vMRoutes.delete(
   `${BASE_PATH}/:idVM`, 
