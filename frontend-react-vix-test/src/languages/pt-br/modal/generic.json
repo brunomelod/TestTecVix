@@ -27,5 +27,7 @@
   "placeholderObservations": "Observações sobre este MSP, origem, gerente comercial, acompanhamentos, etc.",
   "saveNotes": "Salvar notas",
   "editNotes": "Editar notas",
-  "createNotes": "Criar notas"
+  "createNotes": "Criar notas",
+  "search": "Buscar",
+  "delete": "Deletar"
 }
