@@ -20,6 +20,7 @@ export const useSetSidebar = () => {
     "/msp-register": t("sidebar.registers"),
     "/company-register": t("sidebar.registers"),
     "/colaborator-register": t("sidebar.registers"),
+    "/employees": t("sidebar.registers"),
     "/settings": t("sidebar.settings"),
     "/services": t("sidebar.services"),
     "/msp-management": t("sidebar.management"),
