@@ -73,6 +73,19 @@ export const useVmResource = () => {
     },
   ];
 
+  const operatingSystemsOptions = [
+    { value: "ubuntu-22.04", label: "Ubuntu 22.04 LTS" },
+    { value: "ubuntu-20.04", label: "Ubuntu 20.04 LTS" },
+    { value: "debian-11", label: "Debian 11" },
+    { value: "centos-8", label: "CentOS 8" },
+    { value: "rocky-linux-9", label: "Rocky Linux 9" },
+    { value: "windows-server-2022", label: "Windows Server 2022" },
+    { value: "windows-server-2019", label: "Windows Server 2019" },
+    { value: "fedora-38", label: "Fedora 38" },
+    { value: "arch-linux", label: "Arch Linux" },
+    { value: "alpine-linux", label: "Alpine Linux" },
+  ];
+
   const localizationOptions: { value: ETaskLocation; label: string }[] = [
     {
       value: ETaskLocation.usa_miami,
@@ -366,6 +379,7 @@ export const useVmResource = () => {
     getNetworkType,
     storageOptions,
     localizationOptions,
+    operatingSystemsOptions,
     isLoading,
     networkTypeOptions,
     isLoadingCreateVM,

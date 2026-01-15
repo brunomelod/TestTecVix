@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `vM` ADD COLUMN `location` VARCHAR(191) NULL,
+    ADD COLUMN `pass` VARCHAR(191) NULL;
