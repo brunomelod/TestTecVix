@@ -44,6 +44,8 @@ Table vM {
   ram Int [not null]
   disk Int [not null]
   hasBackup Boolean [default: false]
+  pass String
+  location String
   idBrandMaster Int
   status EVMStatus
   createdAt DateTime [default: `now()`]

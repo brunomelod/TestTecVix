@@ -58,6 +58,8 @@ model vM {
   ram           Int
   disk          Int
   hasBackup     Boolean?     @default(false)
+  pass          String?
+  location      String?
   idBrandMaster Int?
   status        EVMStatus?
   createdAt     DateTime?    @default(now()) @db.DateTime(0)

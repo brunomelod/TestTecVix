@@ -230,6 +230,18 @@
           ],
           "default": false
         },
+        "pass": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "location": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "status": {
           "type": [
             "string",
