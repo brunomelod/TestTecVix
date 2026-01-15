@@ -1,105 +1,74 @@
-import { themeColors, useZTheme } from "../../stores/useZTheme";
-import { SettingsTabList } from "./components/List/SettingsTabList";
-import { ScreenFullPage } from "../../components/ScreenFullPage";
-import { TextRob20Font1MB } from "../../components/Text1MB";
+import { Screen } from "../../components/Screen";
+import { Stack, Tabs, Tab, Box } from "@mui/material";
+import { useState } from "react";
+import { useZTheme } from "../../stores/useZTheme";
 import { useTranslation } from "react-i18next";
-import { WhiteLabel } from "./components/WhiteLabel";
-import { Stack } from "@mui/material";
-import { useZSettingsVar } from "../../stores/useZSettingsVar";
-import { TabPanel } from "../../components/Tab/TabPanel";
-import { ProfileAndNotifications } from "./components/ProfileAndNotifications";
-import { UnderConstruction } from "../../components/UnderConstruction";
-import { useEffect } from "react";
-
-export interface IWhiteLabelChildProps {
-  theme: {
-    dark: themeColors;
-    light: themeColors;
-  };
-}
+import { TextRob20Font1MB } from "../../components/Text1MB";
+import { PersonalInfoTab } from "./components/PersonalInfoTab";
+import { SecurityTab } from "./components/SecurityTab";
+import { ProfileImageTab } from "./components/ProfileImageTab";
 
 export const SettingsPage = () => {
-  const { mode, theme } = useZTheme();
-  const { currentTabIndex, setSettings } = useZSettingsVar();
+  const { theme, mode } = useZTheme();
   const { t } = useTranslation();
+  const [currentTab, setCurrentTab] = useState(0);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const queryParams = new URLSearchParams(window.location.search);
-      if (queryParams.get("stripe_connected") === "success") {
-        setSettings({ currentTabIndex: 2 });
-      }
-    }
-  }, []);
-
-  const tabList = [
-    {
-      label: t("tabs.whiteLabel"),
-      component: <WhiteLabel />,
-      title: t("whiteLabel.title"),
-    },
-    {
-      label: t("tabs.profileNotifications"),
-      component: <ProfileAndNotifications />,
-      title: t("tabs.profileNotifications"),
-    },
-    {
-      label: t("tabs.billingsPlans"),
-      component: <UnderConstruction />,
-      title: t("tabs.billingsPlans"),
-    },
-    {
-      label: t("tabs.logsHistory"),
-      component: <UnderConstruction />,
-      title: t("tabs.logsHistory"),
-    },
-  ];
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
+    setCurrentTab(newValue);
+  };
 
   return (
-    <ScreenFullPage
-      keepSubtitle
-      title={
+    <Screen
+      sx={{
+        overflowY: "auto",
+        padding: "40px",
+      }}
+    >
+      <Stack spacing={3} sx={{ maxWidth: "900px", width: "100%" }}>
+        {/* Título */}
         <TextRob20Font1MB
           sx={{
             color: theme[mode].primary,
-            fontSize: "20px",
+            fontSize: "28px",
             fontWeight: "500",
-            lineHeight: "24px",
+            lineHeight: "40px",
           }}
         >
-          {tabList[currentTabIndex].title}
+          {t("settings.title") || "Configurações"}
         </TextRob20Font1MB>
-      }
-      subtitle={<SettingsTabList tabList={tabList} />}
-      sxTitleSubTitle={{
-        paddingLeft: "40px",
-        paddingRight: "40px",
-      }}
-      sxContainer={{
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        paddingBottom: "40px",
-      }}
-    >
-      <Stack
-        sx={{
-          width: "100%",
-          "@media (max-width: 1000px)": {
-            marginTop: "56px",
-          },
-        }}
-      >
-        {/* Tab panels */}
-        {tabList.map((item, index) => (
-          <TabPanel
-            value={currentTabIndex}
-            index={index}
-            key={`${index}-${item.label}`}
+
+        {/* Tabs */}
+        <Box sx={{ borderBottom: 1, borderColor: theme[mode].grayLight }}>
+          <Tabs
+            value={currentTab}
+            onChange={handleTabChange}
+            sx={{
+              "& .MuiTab-root": {
+                color: theme[mode].gray,
+                textTransform: "none",
+                fontSize: "16px",
+              },
+              "& .Mui-selected": {
+                color: theme[mode].blue + " !important",
+              },
+              "& .MuiTabs-indicator": {
+                backgroundColor: theme[mode].blue,
+              },
+            }}
           >
-            {item.component}
-          </TabPanel>
-        ))}
+            <Tab label={t("settings.personalInfo") || "Informações Pessoais"} />
+            <Tab label={t("settings.security") || "Segurança"} />
+            <Tab label={t("settings.profileImage") || "Foto de Perfil"} />
+          </Tabs>
+        </Box>
+
+        {/* Conteúdo das Tabs */}
+        <Box sx={{ py: 3 }}>
+          {currentTab === 0 && <PersonalInfoTab />}
+          {currentTab === 1 && <SecurityTab />}
+          {currentTab === 2 && <ProfileImageTab />}
+        </Box>
       </Stack>
-    </ScreenFullPage>
+    </Screen>
   );
 };

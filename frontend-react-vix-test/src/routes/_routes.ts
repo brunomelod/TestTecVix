@@ -7,6 +7,7 @@ import { RegisterRouter } from "./RegisterRouter";
 import { LoginRouter } from "./LoginRouter";
 import { WhiteLabelRouter } from "./WhiteLabelRouter";
 import { EmployeesRouter } from "./EmployeesRouter";
+import { SettingsRouter } from "./SettingsRouter";
 
 export const mainRoutes = [
   DefaultRouter,
@@ -18,4 +19,5 @@ export const mainRoutes = [
   MSPRegisterRouter,
   EmployeesRouter,
   WhiteLabelRouter,
+  SettingsRouter,
 ];
