@@ -53,4 +53,11 @@ export class UserController {
     const result = await this.userService.deleteProfileImage(idUserStr);
     return res.status(STATUS_CODE.OK).json(result);
   }
+
+  async refreshToken(req: CustomRequest<unknown>, res: Response) {
+    const { idUser } = req.params;
+    const idUserStr = Array.isArray(idUser) ? idUser[0] : idUser;
+    const result = await this.userService.refreshToken(idUserStr);
+    return res.status(STATUS_CODE.OK).json(result);
+  }
 }

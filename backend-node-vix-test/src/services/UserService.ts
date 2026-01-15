@@ -5,6 +5,7 @@ import { STATUS_CODE } from "../constants/statusCode";
 import { TUserCreated, userCreatedSchema } from "../types/validations/User/createUser";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
+import { genToken } from "../utils/jwt";
 
 const userUpdateSchema = userCreatedSchema.partial();
 type TUserUpdate = z.infer<typeof userUpdateSchema>;
@@ -127,5 +128,26 @@ export class UserService {
     await this.userModel.update(idUser, { profileImgUrl: null });
 
     return { message: "Profile image removed successfully" };
+  }
+
+  async refreshToken(idUser: string) {
+    const user = await this.userModel.findById(idUser);
+    
+    if (!user) {
+      throw new AppError(ERROR_MESSAGE.USER_NOT_FOUND, STATUS_CODE.NOT_FOUND);
+    }
+
+    if (!user.isActive) {
+      throw new AppError("User is not active", STATUS_CODE.UNAUTHORIZED);
+    }
+
+    // Gerar novo token
+    const token = genToken({
+      idUser: user.idUser,
+      email: user.email,
+      role: user.role,
+    });
+
+    return { token };
   }
 }

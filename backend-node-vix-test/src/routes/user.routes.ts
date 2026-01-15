@@ -80,4 +80,14 @@ userRoutes.delete(
   }
 );
 
+// Renovar token JWT (próprio usuário)
+userRoutes.get(
+  `${BASE_PATH}/token/:idUser`,
+  authUser,
+  isSelfOrIsManagerOrIsAdm,
+  async (req, res) => {
+    await userController.refreshToken(req, res);
+  }
+);
+
 export { userRoutes };
