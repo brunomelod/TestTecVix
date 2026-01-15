@@ -1,7 +1,7 @@
 import { Stack, TextField, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useZTheme } from "../../../stores/useZTheme";
-import { useTranslation } from "../../../react-i18next";
+import { useTranslation } from "react-i18next";
 import { useZUserProfile } from "../../../stores/useZUserProfile";
 import { api } from "../../../services/api";
 import { toast } from "react-toastify";
