@@ -7,11 +7,16 @@ import { TextRob20Font1MB } from "../../components/Text1MB";
 import { PersonalInfoTab } from "./components/PersonalInfoTab";
 import { SecurityTab } from "./components/SecurityTab";
 import { ProfileImageTab } from "./components/ProfileImageTab";
+import { WhiteLabel } from "./components/WhiteLabel";
+import { useZUserProfile } from "../../stores/useZUserProfile";
 
 export const SettingsPage = () => {
   const { theme, mode } = useZTheme();
   const { t } = useTranslation();
+  const { role } = useZUserProfile();
   const [currentTab, setCurrentTab] = useState(0);
+  
+  const isAdmin = role === "admin";
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue);
@@ -59,6 +64,7 @@ export const SettingsPage = () => {
             <Tab label={t("settings.personalInfo") || "Informações Pessoais"} />
             <Tab label={t("settings.security") || "Segurança"} />
             <Tab label={t("settings.profileImage") || "Foto de Perfil"} />
+            {isAdmin && <Tab label={t("settings.whiteLabel") || "White Label"} />}
           </Tabs>
         </Box>
 
@@ -67,6 +73,7 @@ export const SettingsPage = () => {
           {currentTab === 0 && <PersonalInfoTab />}
           {currentTab === 1 && <SecurityTab />}
           {currentTab === 2 && <ProfileImageTab />}
+          {currentTab === 3 && isAdmin && <WhiteLabel />}
         </Box>
       </Stack>
     </Screen>
