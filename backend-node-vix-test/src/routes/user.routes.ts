@@ -4,17 +4,18 @@ import { API_VERSION } from "../constants/basePathRoutes";
 import { authUser } from "../auth/authUser";
 import { isAdmin } from "../auth/isAdmin";
 import { isSelfOrIsManagerOrIsAdm } from "../auth/isSelfOrIsManagerOrIsAdm";
+import { isManagerOrIsAdmin } from "../auth/isManagerOrIsAdmin";
 
 const BASE_PATH = API_VERSION.V1 + "/users";
 
 const userRoutes = Router();
 const userController = new UserController();
 
-// Listar todos os usuários (apenas admin)
+// Listar todos os usuários (admin ou manager)
 userRoutes.get(
   BASE_PATH,
   authUser,
-  isAdmin,
+  isManagerOrIsAdmin,
   async (req, res) => {
     await userController.listAll(req, res);
   }
