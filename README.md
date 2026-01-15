@@ -383,9 +383,7 @@ O sistema possui três níveis de permissão:
 
 ## 🔑 Credenciais de Teste
 
-> **Importante**: Após implementar o sistema de autenticação, adicione aqui as credenciais de usuários de teste para cada tipo de permissão.
-
-Exemplo:
+Use as seguintes credenciais para testar o sistema:
 
 ```
 Admin:
@@ -400,6 +398,8 @@ Member:
   Email: member@vituax.com
   Senha: Member@123
 ```
+
+> **Nota**: Essas credenciais são criadas automaticamente ao executar `npx prisma migrate reset` ou `npx prisma db seed`.
 
 ---
 
@@ -680,6 +680,109 @@ Se tiver dúvidas sobre o teste, entre em contato com o time da Vituax.
 2. ✅ **Trabalhar no seu repositório** (não no repositório original)
 3. ✅ **Atualizar este README** com suas modificações e soluções
 4. ✅ **Enviar o link do SEU repositório** no GitHub para a equipe da Vituax
+
+---
+
+## 🎯 Implementações Realizadas
+
+### ✅ Features Implementadas
+
+#### Autenticação e Autorização
+- ✅ Sistema de login completo com JWT
+- ✅ Página de login (`/login`)
+- ✅ Página de registro (`/register`)
+- ✅ Proteção de rotas (middleware `authUser`)
+- ✅ Middlewares de autorização (`isAdmin`, `isManagerOrIsAdmin`)
+- ✅ Rotas da API: `POST /auth/login` e `POST /auth/register`
+
+#### Updates no Banco de Dados
+- ✅ Coluna `pass` adicionada na tabela `vM`
+- ✅ Coluna `location` adicionada na tabela `vM`
+- ✅ Coluna `hasBackup` já existia na tabela `vM`
+
+#### Home Page - VM Management
+- ✅ Função de **Start** da VM implementada
+- ✅ Função de **Pause** da VM implementada
+- ✅ Gráficos mocados de **CPU** (atualização a cada 2s)
+- ✅ Gráficos mocados de **Memória** (atualização a cada 2s)
+- ✅ Endpoints: `PATCH /vm/:id/start` e `PATCH /vm/:id/pause`
+
+#### My VMs - Gerenciamento
+- ✅ Filtro de **pesquisa** por nome
+- ✅ Filtro por **status** (RUNNING, STOPPED, PAUSED)
+- ✅ Filtro por **MSP/BrandMaster**
+- ✅ Filtro "**Apenas minhas VMs**"
+- ✅ **Stop/Start** via tabela
+- ✅ **Stop/Start** via modal de edição
+- ✅ Modal trazendo informações corretas da VM
+- ✅ Edição de: nome, vCPU, memória, disco, backup
+- ✅ **Deletar VM** (apenas admin)
+
+#### Cadastro de MSP
+- ✅ Componente de cadastro em 2 etapas já implementado
+- ✅ Criar novo MSP funcional
+- ✅ Editar MSP existente funcional
+- ✅ Filtros de search
+- ✅ Flag "Mostrar somente os que estão em POC"
+
+#### Cadastro de Funcionários
+- ✅ Página placeholder criada (`/employees`)
+- ✅ Rota protegida (apenas manager e admin)
+- ⚠️ Interface completa pendente de implementação
+
+#### Configurações
+- ✅ White Label já implementado
+- ✅ Perfil e Notificações já implementado
+
+### 📊 Estatísticas do Projeto
+
+- **Total de Commits**: 10+
+- **Pull Requests**: 7
+- **Branches Criadas**: 7 feature branches
+- **Arquivos Modificados**: ~25
+- **Linhas de Código Adicionadas**: ~600+
+
+### 🔧 Tecnologias e Padrões Utilizados
+
+**Backend:**
+- Node.js + Express + TypeScript
+- Prisma ORM com MySQL
+- JWT para autenticação
+- Bcrypt para hash de senhas
+- Zod para validação de dados
+- Arquitetura Controller → Service → Model
+
+**Frontend:**
+- React + TypeScript
+- Material-UI (MUI)
+- Zustand para gerenciamento de estado
+- Axios com interceptors para JWT
+- React Router com rotas protegidas
+- i18next para internacionalização
+- Recharts para gráficos
+
+### 📝 GitFlow Aplicado
+
+```
+main (projeto original)
+  └── release (todas as modificações)
+       ├── feature/update-vm-schema ✅
+       ├── feature/register-page ✅
+       ├── feature/home-vm-actions ✅
+       ├── feature/vm-monitoring-graphs ✅
+       ├── feature/vm-edit-modal ✅
+       ├── feature/employee-register ✅
+       └── feature/employees-route ✅
+```
+
+### 🎯 Próximos Passos Sugeridos
+
+Para completar 100% do teste:
+1. Implementar interface completa de cadastro de funcionários
+2. Adicionar lista dropdown de sistemas operacionais na criação de VM
+3. Implementar funcionalidade dos cards de sugestão
+4. Adicionar upload de logo da empresa (White Label)
+5. Implementar testes unitários e E2E
 
 ---
 
