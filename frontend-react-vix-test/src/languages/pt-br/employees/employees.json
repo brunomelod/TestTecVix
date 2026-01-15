@@ -1,0 +1,18 @@
+{
+  "name": "Nome",
+  "email": "Email",
+  "role": "Função",
+  "status": "Status",
+  "actions": "Ações",
+  "search": "Buscar funcionário...",
+  "addNew": "Novo Funcionário",
+  "edit": "Editar Funcionário",
+  "create": "Novo Funcionário",
+  "password": "Senha",
+  "active": "Ativo",
+  "confirmDelete": "Confirmar Exclusão",
+  "confirmDeleteMessage": "Deseja realmente deletar este funcionário?",
+  "createSuccess": "Funcionário criado com sucesso!",
+  "updateSuccess": "Funcionário atualizado com sucesso!",
+  "deleteSuccess": "Funcionário deletado com sucesso!"
+}

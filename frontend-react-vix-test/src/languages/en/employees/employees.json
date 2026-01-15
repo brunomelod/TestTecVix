@@ -1,0 +1,18 @@
+{
+  "name": "Name",
+  "email": "Email",
+  "role": "Role",
+  "status": "Status",
+  "actions": "Actions",
+  "search": "Search employee...",
+  "addNew": "New Employee",
+  "edit": "Edit Employee",
+  "create": "New Employee",
+  "password": "Password",
+  "active": "Active",
+  "confirmDelete": "Confirm Deletion",
+  "confirmDeleteMessage": "Do you really want to delete this employee?",
+  "createSuccess": "Employee created successfully!",
+  "updateSuccess": "Employee updated successfully!",
+  "deleteSuccess": "Employee deleted successfully!"
+}

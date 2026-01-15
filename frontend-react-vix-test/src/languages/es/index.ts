@@ -35,6 +35,7 @@ import isos from "./isos/isos.json";
 import selfRegister from "./selfRegister/selfRegister.json";
 import alerts from "./alerts/alerts.json";
 import settings from "./settings/settings.json";
+import employees from "./employees/employees.json";
 
 export const es = {
   ...en,
@@ -74,4 +75,5 @@ export const es = {
   selfRegister,
   alerts,
   settings,
+  employees,
 };
