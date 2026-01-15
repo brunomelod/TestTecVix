@@ -324,6 +324,36 @@ export const useVmResource = () => {
     return Boolean(response.data);
   };
 
+  const startVM = async (idVM: number) => {
+    const auth = await getAuth();
+    const response = await api.patch<IVMCreatedResponse>({
+      url: `/vm/${idVM}/start`,
+      auth,
+    });
+    if (response.error) {
+      toast.error(response.message);
+      return null;
+    }
+    
+    toast.success(t("home.vmStarted") || "VM iniciada com sucesso!");
+    return response.data;
+  };
+
+  const pauseVM = async (idVM: number) => {
+    const auth = await getAuth();
+    const response = await api.patch<IVMCreatedResponse>({
+      url: `/vm/${idVM}/pause`,
+      auth,
+    });
+    if (response.error) {
+      toast.error(response.message);
+      return null;
+    }
+    
+    toast.success(t("home.vmPaused") || "VM pausada com sucesso!");
+    return response.data;
+  };
+
   return {
     createVm,
     updateNameVm,
@@ -344,5 +374,7 @@ export const useVmResource = () => {
     getOSDeletedLabel,
     monitoringVMStatus,
     updateVMStatus,
+    startVM,
+    pauseVM,
   };
 };
