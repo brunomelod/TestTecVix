@@ -33,6 +33,7 @@ import firewall from "./firewall/firewall.json";
 import isos from "./isos/isos.json";
 import selfRegister from "./selfRegister/selfRegister.json";
 import alerts from "./alerts/alerts.json";
+import settings from "./settings/settings.json";
 
 export const en = {
   home,
@@ -44,7 +45,6 @@ export const en = {
   profileCard,
   generic,
   createVm,
-
   graphics,
   myVMs,
   dashboard,
@@ -71,4 +71,5 @@ export const en = {
   isos,
   selfRegister,
   alerts,
+  settings,
 };

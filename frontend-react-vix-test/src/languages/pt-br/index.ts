@@ -34,6 +34,7 @@ import firewall from "./firewall/firewall.json";
 import isos from "./isos/isos.json";
 import selfRegister from "./selfRegister/selfRegister.json";
 import alerts from "./alerts/alerts.json";
+import settings from "./settings/settings.json";
 
 export const ptBR = {
   ...en,
@@ -72,4 +73,5 @@ export const ptBR = {
   isos,
   selfRegister,
   alerts,
+  settings,
 };
